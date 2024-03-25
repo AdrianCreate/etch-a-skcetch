@@ -1,16 +1,29 @@
 const GRIDSIDE = 600;
 let squaresPerSide = 16;
 
+
 const grid = document.querySelector(".grid");
 const sliderContainer = document.querySelector(".slider-container");
 const slider = document.querySelector(".slider");
 const sliderValue = document.querySelector(".slider-value");
 
+const blackButton = document.querySelector(".black-toggle");
+const eraserButton = document.querySelector(".eraser-toggle");
+const gridToggle = document.querySelector(".grid-toggle");
+const clearButton = document.querySelector(".clear-button");
+
+
+
+
 sliderValue.textContent = `${slider.value} x ${slider.value} (Resolution)`;
 grid.style.width = grid.style.height = `${GRIDSIDE}px`
 
-function setBackgroundColor() {
+function setBackgroundColorBlack() {
   this.style.backgroundColor = "black";
+}
+
+function setBackgroundColorWhite() {
+  this.style.backgroundColor = "white";
 }
 
 function createGridCells(squaresPerSide) {
@@ -23,7 +36,7 @@ function createGridCells(squaresPerSide) {
   gridCell.classList.add("cell");
 
   grid.appendChild(gridCell);
-  gridCell.addEventListener("mouseover", setBackgroundColor);
+  gridCell.addEventListener("mouseover", setBackgroundColorBlack);
   }
 }
 
@@ -40,4 +53,24 @@ slider.oninput = function () {
   createGridCells(this.value);
 }
 
+
+blackButton.addEventListener("click", function () {
+  grid.querySelectorAll(".cell").forEach(cell => {
+    cell.removeEventListener("mouseover", setBackgroundColorWhite);
+    cell.addEventListener("mouseover", setBackgroundColorBlack);
+  });
+});
+
+eraserButton.addEventListener("click", function () {
+  grid.querySelectorAll(".cell").forEach(cell => {
+    cell.removeEventListener("mouseover", setBackgroundColorBlack);
+    cell.addEventListener("mouseover", setBackgroundColorWhite);
+  });
+});
+
+clearButton.addEventListener("click", function() {
+  grid.querySelectorAll(".cell").forEach(cell => {
+    cell.style.backgroundColor = 'white';
+  });
+});
 createGridCells(16);
