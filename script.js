@@ -1,26 +1,43 @@
 const GRIDSIDE = 600;
-let rows= 16;
-let cols= 16;
+let squaresPerSide = 16;
 
 const grid = document.querySelector(".grid");
-grid.style.width = `${GRIDSIDE}px`
-grid.style.height = `${GRIDSIDE}px`
+const sliderContainer = document.querySelector(".slider-container");
+const slider = document.querySelector(".slider");
+const sliderValue = document.querySelector(".slider-value");
 
-function changeBackgroundColor() {
+sliderValue.textContent = `${slider.value} x ${slider.value} (Resolution)`;
+grid.style.width = grid.style.height = `${GRIDSIDE}px`
+
+function setBackgroundColor() {
   this.style.backgroundColor = "black";
 }
 
-function createGridCells() {
-  for(let i = 0;i < (rows * cols); i++) {
+function createGridCells(squaresPerSide) {
+  const numberOfSquares = squaresPerSide * squaresPerSide;
+  const cellSide = `${(GRIDSIDE / squaresPerSide) - 2}px`;
+  for(let i = 0;i < numberOfSquares; i++) {
   const gridCell = document.createElement("div");
 
-  gridCell.style.width = `${(GRIDSIDE / cols) - 2}px`;
-  gridCell.style.height = `${(GRIDSIDE / rows) - 2}px`;
+  gridCell.style.width =  gridCell.style.height = cellSide;
   gridCell.classList.add("cell");
 
   grid.appendChild(gridCell);
-  gridCell.addEventListener("mouseover", changeBackgroundColor);
+  gridCell.addEventListener("mouseover", setBackgroundColor);
   }
 }
 
-createGridCells();
+function removeGridCells () {
+  while(grid.firstChild) {
+    grid.removeChild(grid.firstChild);
+  }
+}
+
+slider.oninput = function () {
+  let txt = `${this.value} x ${this.value} (Resolution)`
+  sliderValue.textContent = txt;
+  removeGridCells();
+  createGridCells(this.value);
+}
+
+createGridCells(16);

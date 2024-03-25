@@ -7,9 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="sketch-area" class="grid">
-
-  </div>
+  <div class="flex-container">
+    <div class="title"><h1>Etch-A-Sketch</h1></div>
+    <div class="buttons">
+      <button>Black</button>
+      <button>Eraser</button>
+      <button>Random</button>
+      <button>Clear</button>
+    </div>
+    <div id="sketch-area" class="grid">
+    </div>
+    <div class="slider-container">
+      <input type="range" min="4" max = "64" value="16" class="slider" id="slider">
+      <p class="slider-value"></p>
+    </div>
+</div>
   <script src="script.js"></script>
 </body>
 </html>

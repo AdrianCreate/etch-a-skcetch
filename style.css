@@ -8,6 +8,12 @@ body {
   background-color: aliceblue;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -18,4 +24,13 @@ body {
 
 .cell {
   border: 1px solid whitesmoke;
+}
+
+.slider {
+  height: 45px;
+  width: 400px;
+}
+
+.slider:hover {
+  opacity: 1;
 }
